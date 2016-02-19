@@ -1,7 +1,7 @@
 {
   "private": true,
   "productName": "brie",
-  "description": "npm package manager",
+  "description": "npm the package manager gui wrapper",
   "license": "MIT",
   "repository": "soomtong/brie",
   "author": {
@@ -9,7 +9,7 @@
     "email": "soomtong@gmail.com"
   },
   "engines": {
-    "node": ">=0.10.0"
+    "node": ">=4.0.0"
   },
   "scripts": {
     "start": "electron .",
@@ -25,6 +25,7 @@
     "electron-prebuilt": "latest"
   },
   "dependencies": {
+    "electron-default-menu": "^0.1.1",
     "node-jsx": "latest",
     "react": "latest"
   }

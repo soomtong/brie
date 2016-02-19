@@ -10,10 +10,10 @@ It use [Electron](http://electron.atom.io/) and [Photon](http://photonkit.com/)
 
 ## To Do
 
-- [ ] Set up UI
+- [x] Set up UI
 - [ ] Replace react-photonkit
 - [ ] Remember latest window position and size
 - [ ] Make new `package.json` file if not initialized folder added
-
+- [ ] Register OSX notification when a job finished
 
 #### License [MIT](LICENSE.md)

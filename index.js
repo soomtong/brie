@@ -1,6 +1,8 @@
 'use strict';
 const app = require('app');
 const BrowserWindow = require('browser-window');
+const Menu = require('menu');
+const defaultMenu = require('electron-default-menu');
 
 // report crashes to the Electron project
 require('crash-reporter').start({
@@ -21,7 +23,7 @@ app.on('window-all-closed', function () {
 
 app.on('ready', function () {
   const width = 800;
-  const height = 600;
+  const height = 540;
   const is2nd = process.argv.indexOf('--2nd') >= 0;
 
   var opts = {
@@ -43,10 +45,27 @@ app.on('ready', function () {
 
   mainWindow.loadURL(`file://${__dirname}/index.html`);
   mainWindow.on('closed', function () {
-    // deref the window
+    // de ref the window
     // for multiple windows store them in an array
     mainWindow = null;
   });
+
+  var menu = defaultMenu();
+  menu.splice(2, 0, {
+    label: 'Tools',
+    submenu: [
+      {
+        label: 'Clean Cache',
+        click: function (item, focusedWindow) {
+          console.log('Cleaned up');
+        }
+      }
+    ]
+  });
+
+  // Set top-level application menu, using modified template
+  Menu.setApplicationMenu(Menu.buildFromTemplate(menu));
+
 });
 
 function setOptsForDualScreen(opts) {
