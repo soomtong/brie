@@ -8,6 +8,8 @@ yeah! should check out this cool. it's node package manager wrapper.
 
 It use [Electron](http://electron.atom.io/) and [Photon](http://photonkit.com/)
 
+![Brie 0.0.1](doc/brie.png)
+
 ## To Do
 
 - [x] Set up UI
