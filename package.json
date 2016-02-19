@@ -1,6 +1,7 @@
 {
   "private": true,
   "productName": "brie",
+  "version": "0.0.1",
   "description": "npm the package manager gui wrapper",
   "license": "MIT",
   "repository": "soomtong/brie",

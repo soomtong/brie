@@ -1,121 +1,35 @@
 'use strict';
 
 var React = require('react');
-var PhotoneKit = require('react-photonkit');
+var {Window, Content, Pane} = require('react-photonkit');
 
 var Header = require('./header');
+var Footer = require('./footer');
+var Repository = require('./repository');
+var List = require('./package-list');
+var Info = require('./package-info');
 
-var color = {
-  red: { color: '#fc605b' },
-  orange: { color: '#fdbc40' },
-  green: { color: '#34c84a' },
-  blue: { color: '#57acf5' }
-};
-
-var width = {
-  version: { width: '10em' }
-};
-
-//var Header = React.createClass();
+var headerTitleInfo = "42 package installed in Global";
+var footerTitleInfo = "Brie 0.1.1";
 
 module.exports = React.createClass({
   render: function () {
-    var titleInfo = "42 package installed in Global"
 
-    return <div className="window">
-      <Header info={titleInfo} />
+    return <Window>
+      <Header info={headerTitleInfo}/>
 
-      <div className="window-content">
-        <div className="pane-group">
-          <div className="pane pane-sm sidebar">
+      <Content>
+        <Pane ptSize="sm" sidebar>
+          <Repository />
+        </Pane>
 
-            <div className="pane-group">
-              <div className="pane pane-sm sidebar">
-                <nav className="nav-group">
-                  <h5 className="nav-group-title">Public</h5>
-                  <a className="nav-group-item active">
-                    <span className="icon icon-home" /> Global
-                  </a>
-                </nav>
+        <Pane>
+          <Info package=""/>
+          <List repository=""/>
+        </Pane>
+      </Content>
 
-                <nav className="nav-group">
-                  <h5 className="nav-group-title">Private</h5>
-                  <span className="nav-group-item">
-                    <span className="icon icon-record" style={color.blue} /> Brie-development
-                  </span>
-                  <span className="nav-group-item">
-                    <span className="icon icon-record" style={color.red} /> Express.js
-                  </span>
-                  <span className="nav-group-item">
-                    <span className="icon icon-record" style={color.orange} /> Haroo-cloud-core
-                  </span>
-                  <span className="nav-group-item">
-                    <span className="icon icon-record" style={color.green} /> react-example
-                  </span>
-                  <span className="nav-group-item">
-                    <span className="icon icon-record" style={color.green} /> hello
-                  </span>
-                  <span className="nav-group-item">
-                    <span className="icon icon-record" style={color.blue} /> zen
-                  </span>
-                  <span className="nav-group-item">
-                    <span className="icon icon-record" style={color.red} /> Red
-                  </span>
-                  <span className="nav-group-item">
-                    <span className="icon icon-record" style={color.orange} /> Orange
-                  </span>
-                  <span className="nav-group-item">
-                    <span className="icon icon-record" style={color.green} /> Green
-                  </span>
-                  <span className="nav-group-item">
-                    <span className="icon icon-record" style={color.blue} /> Blue
-                  </span>
-                </nav>
-
-              </div>
-
-            </div>
-
-          </div>
-          <div className="pane">
-            <table className="table-striped">
-              <thead>
-              <tr>
-                <th>Name</th>
-                <th style={width.version}>Version</th>
-                <th style={width.version}>Latest</th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr>
-                <td>express</td>
-                <td>3.8.1</td>
-                <td>4.11.1</td>
-              </tr>
-              <tr>
-                <td>react</td>
-                <td>0.13.1</td>
-                <td>0.14.3</td>
-              </tr>
-              <tr>
-                <td>puddy</td>
-                <td>1.0.0</td>
-                <td>1.0.1</td>
-              </tr>
-              <tr>
-                <td>bluebird</td>
-                <td>3.0.1</td>
-                <td>3.3.1</td>
-              </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-
-      <footer className="toolbar toolbar-footer">
-        <h1 className="title">Brie 0.1.0</h1>
-      </footer>
-    </div>
+      <Footer info={footerTitleInfo}/>
+    </Window>
   }
 });
