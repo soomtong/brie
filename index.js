@@ -15,12 +15,61 @@ require('crash-reporter').start({
 // prevent window being GC'd
 let mainWindow = null;
 
-app.on('window-all-closed', function () {
-  if (process.platform !== 'darwin') {
-    app.quit();
-  }
-});
+function onClosed() {
+  // dereference the window
+  // for multiple windows store them in an array
+  mainWindow = null;
+}
 
+function createMainWindow() {
+  var opts = {
+    width: 800,
+    height: 540,
+    minWidth: 640,
+    minHeight: 420,
+    resizable: true,
+    'accept-first-mouse': true,
+    'title-bar-style': 'hidden'
+  };
+
+  const is2nd = process.argv.indexOf('--2nd') >= 0;
+
+  if (is2nd) {
+    setOptsForDualScreen(opts);
+  }
+
+  const win = new BrowserWindow(opts);
+/*
+  if (process.env.DEV) {
+    win.loadUrl('http://localhost:8000/dev.html');
+    win.openDevTools();
+  } else {
+    win.loadUrl(`file://${__dirname}/index.html`);
+  }
+*/
+  win.loadURL(`file://${__dirname}/index.html`);
+  win.on('closed', onClosed);
+
+  var menu = defaultMenu();
+  menu.splice(2, 0, {
+    label: 'Tools',
+    submenu: [
+      {
+        label: 'Clean Cache',
+        click: function (item, focusedWindow) {
+          console.log('Cleaned up');
+        }
+      }
+    ]
+  });
+
+  // Set top-level application menu, using modified template
+  Menu.setApplicationMenu(Menu.buildFromTemplate(menu));
+
+  return win;
+}
+
+/*
 app.on('ready', function () {
   const width = 800;
   const height = 540;
@@ -67,6 +116,7 @@ app.on('ready', function () {
   Menu.setApplicationMenu(Menu.buildFromTemplate(menu));
 
 });
+*/
 
 function setOptsForDualScreen(opts) {
   var atomScreen = require('screen');
@@ -77,3 +127,19 @@ function setOptsForDualScreen(opts) {
     opts.y = d2.bounds.y + (d2.size.height - opts.height) / 2;
   }
 }
+
+app.on('window-all-closed', () => {
+  if (process.platform !== 'darwin') {
+    app.quit();
+  }
+});
+
+app.on('activate-with-no-open-windows', () => {
+  if (!mainWindow) {
+    mainWindow = createMainWindow();
+  }
+});
+
+app.on('ready', () => {
+  mainWindow = createMainWindow();
+});

@@ -17,6 +17,8 @@ module.exports = React.createClass({
   render: function () {
     return <div className="window">
       <header className="toolbar toolbar-header">
+        <h1 className="title">42 package installed in Global</h1>
+
         <div className="toolbar-actions">
 
           <button className="btn btn-default" title="Update all packages information">
