@@ -1,42 +1,25 @@
 'use strict';
 
 var React = require('react');
-var {Window, Toolbar} = require('react-photonkit');
+var {Toolbar, Actionbar, Button, ButtonGroup} = require('react-photonkit');
 
 var Header = React.createClass({
   render: function () {
-    return <header className="toolbar toolbar-header">
-      <h1 className="title">{ this.props.info }</h1>
+    return <Toolbar title={this.props.info}>
+      <Actionbar>
+        <Button glyph="network" text="Check Out" title="Update all packages information" />
 
-      <div className="toolbar-actions">
+        <ButtonGroup>
+          <Button glyph="download" text="Add Folder" title="Add new Private folder to Stage" />
+          <Button className="btn-inactive" glyph="upload" text="Remove Folder" title="Remove selected folder from Stage" />
+          <Button className="/*active*/" glyph="folder" title="Open selected folder to System file manager" />
+        </ButtonGroup>
 
-        <button className="btn btn-default" title="Update all packages information">
-          <span className="icon icon-network icon-text"/> Check Out
-        </button>
-
-        <div className="btn-group">
-          <button className="btn btn-default" title="Add new Private folder to Stage">
-            <span className="icon icon-download icon-text"/> Add Folder
-          </button>
-          <button className="btn btn-default btn-inactive" title="Remove selected folder from Stage">
-            <span className="icon icon-upload icon-text"/> Remove Folder
-          </button>
-          <button className="btn btn-default /*active*/" title="Open selected folder to System file manager">
-            <span className="icon icon-folder"/>
-          </button>
-        </div>
-
-        <button className="btn btn-default pull-right btn-inactive" title="Search from NPM repository">
-          <span className="icon icon-search icon-text"/> Search New Packages
-        </button>
-        <button className="btn btn-default pull-right" title="Update selected or all package">
-          <span className="icon icon-arrows-ccw icon-text"/> Update
-        </button>
-        <button className="btn btn-default pull-right" title="Install new package">
-          <span className="icon icon-install"/>
-        </button>
-      </div>
-    </header>;
+        <Button className="pull-right btn-inactive" glyph="search" text="Search New Packages" title="Search from NPM repository" />
+        <Button className="pull-right" glyph="install" title="Install new package" />
+        <Button className="pull-right" glyph="arrows-ccw" text="Update" title="Update selected or all package" />
+      </Actionbar>
+    </Toolbar>;
   }
 });
 
